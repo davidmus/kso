@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block tab %}3{% endblock %}
+
+{% if conductor %}
+
+{% block title %}{{ conductor.full_name }}{% endblock %}
+
+{% block activemenu %}$("div.hoverBtn.rk").addClass("selected");{% endblock %}
+
+{% block body %}
+    <h2>{{ conductor.full_name }}</h2>
+
+    {% if conductor.content %}
+        {{ conductor.content|markdown }}
+    {% endif %}
+
+    {% if conductor.lastName != "Keable" %}
+    <h3>KSO performance history</h3>
+    <table cellpadding="0" cellspacing="00">
+        {% for concert in conductor.appearancesInOrder %}
+            <tr>
+                <td>
+                    <a href="/concert/{{ concert.pk }}/">{{ concert.dateAndVenue }}</a><br />
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+{% endblock %}
+
+{% endif %}

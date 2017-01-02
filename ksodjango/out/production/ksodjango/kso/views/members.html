@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block tab %}3{% endblock %}
+
+{% block title %}Orchestra members{% endblock %}
+
+{% block body %}
+    <h2>Orchestra members</h2>
+
+    <table class="list_table">
+        <tr>
+            {% for column, sections in orchestra.items %}
+                <td class="list_column">
+                    {% for section, players in sections.items %}
+                        <p class="list_section"><span class="list_instrument">{{ section }}<br /></span>
+                        {% for player in players %}
+                            <span class="list_player">{{ player.full_name }}
+                            {% if player.isPrincipal %}&dagger;{% endif %}{% if player.isFixer %}*{% endif %}
+                            <br /></span>
+                        {% endfor %}
+                        </p>
+                    {% endfor %}
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+    <p class="list_section"><span class="list_player">&dagger; - Section principal<br />
+    * - Section fixer</span>
+    </p>
+
+{% endblock %}

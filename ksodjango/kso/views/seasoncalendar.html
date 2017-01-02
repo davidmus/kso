@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block tab %}1{% endblock %}
+
+{% block scriptlines %}
+    $("td", $("table.month")).each(function() {
+        $(this).addClass("day" + $(this).text());
+    });
+{% for concert in season.concert_set.all %}{% for rehearsal in concert.rehearsal_set.all %}    setRehearsal({{ rehearsal.start|date:"d" }}, '{{ rehearsal.start|date:"F" }}', '{{ rehearsal.toolTip }}', '{{ rehearsal.link_url }}');
+{% endfor %}    setConcert({{ concert.dateAndTime|date:"d" }}, '{{ concert.dateAndTime|date:"F" }}', '{{ concert.toolTip }}', '{{ concert.link_url }}');
+{% endfor %}    $("td[title]", $("table.month")).tooltip({
+        showBody: "::"
+    });
+{% endblock %}
+
+{% block script %}
+function setStyle(day, month, clazz, title, url) {
+    cell = $("td.day" + day, $("table.month:contains(" + month + ")"));
+    cell.addClass(clazz);
+    cell.attr("title", title);
+    cell.html('<a href="' + url + 'm/" class="cal">' + cell.html() + '</a>');
+}
+function setRehearsal(day, month, title, url) {
+    setStyle(day, month, "calStyle3", title, url);
+}
+function setSectional(day, month, title, url) {
+    setStyle(day, month, "calStyle4", title, url);
+}
+function setConcert(day, month, title, url) {
+    setStyle(day, month, "calStyle5", title, url);
+}
+{% endblock %}
+
+{% block body %}
+
+    <h2>{{ season }}</h2>
+
+    <table cellpadding="0" cellspacing="0" border="0" class="year">
+        {{ calendar|safe }}
+    </table>
+
+    <h3>Downloads</h3>
+    <a href="/season.{{ season.pk }}.m.ics" class="ics">Download season as an iCalendar file</a><br />
+    <span class="outlooktip">Note that if you are using Microsoft Outlook you may need to right click to save this file and import it into your
+    calendar using File / Import rather than letting Outlook open it directly.</span><br />
+
+{% endblock %}

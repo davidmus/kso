@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block tab %}3{% endblock %}
+
+{% if memberObject %}
+
+{% block title %}{{ memberObject.full_name }} - {{ memberObject.instrument.name }}{% endblock %}
+
+{% block body %}
+    <h2>{{ memberObject.full_name }} - {{ memberObject.instrument.name }}
+    {% if memberObject.isPrincipal %}
+        (Principal)
+    {% endif %}
+    </h2>
+
+    {% if memberObject.firstConcert %}
+        <p>First KSO concert: <a href="{{ memberObject.firstConcert.link_url }}">{{ memberObject.firstConcert.displayDescription }}</a>.</p>
+    {% endif %}
+
+    {% if memberObject.content %}
+        {{ memberObject.content|markdown }}
+    {% endif %}
+
+{% endblock %}
+
+{% endif %}

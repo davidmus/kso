@@ -1,0 +1,20 @@
+{% extends "bare.html" %}
+{% load markup %}
+{% load concerts_extras %}
+
+{% block tab %}1{% endblock %}
+
+{% if rehearsal %}
+
+{% block title %}Where to?{% endblock %}
+
+{% block body %}
+
+    <h2>Next KSO rehearsal:</h2>
+
+    <p>{{ rehearsal.venue }}, {{ rehearsal.venue.postcode }}<br />
+    {{ rehearsal.start|date:"g.ia, l j F Y"|remove_dots_from_ampm }}</p>
+
+{% endblock %}
+
+{% endif %}

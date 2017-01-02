@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block tab %}1{% endblock %}
+
+{% block title %}Concert programmes{% endblock %}
+
+{% block body %}
+    <h2>Past concert programmes</h2>
+
+    <table cellpadding="0" cellspacing="0" class="history">
+    {% for concert in concerts %}
+        {% if concert.programme %}
+            <tr>
+                <td>
+                    <div class="programmecover">
+                        <img src="{{ concert.programme.2 }}" class="programmecover" />
+                    </div>
+                </td>
+                <td>
+                    <span class="piece">{{ concert.displayDescription }}
+                    {% if concert.shouldDisplayVenue %}
+                        at {{ concert.venue }}
+                    {% endif %}</span><br />
+                    {% for piece in concert.piecesInOrder %}
+                        <a href="/composer/{{ piece.piece.composer.pk }}/">{{ piece.piece.composer.conventional_name }}</a>:
+                        <span class="piece">{{ piece.piece.display_title }}</span> {% if piece.comment %} ({{ piece.comment }}){% endif %}<br />
+                        {% for soloist in piece.concertpiecesoloist_set.all %}
+                            <span class="soloist">{{ soloist.displayRole }}: <a href="/soloist/{{ soloist.soloist.pk }}/">{{ soloist.soloist }}</a></span><br />
+                        {% endfor %}
+                    {% endfor %}
+                    <a href="/download{{ concert.programme.0 }}" class="pdf">Download programme</a><br />
+                </td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+
+{% endblock %}

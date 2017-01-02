@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load concerts_extras %}
+
+{% block tab %}1{% endblock %}
+
+{% if composer %}
+
+{% block title %}{{ composer }}{% endblock %}
+
+{% block body %}
+    <h2>{{ composer }}
+    {% if composer.dates_string %}
+        <span class="dates">({{ composer.dates_string }})</span>
+    {%  endif %}
+    </h2>
+
+    {% if composer.content %}
+        {{ composer.content|markdown }}
+    {% endif %}
+
+    <h3>KSO performance history</h3>
+    <table cellpadding="0" cellspacing="0" class="history">
+        {% for piece in composer.Composer.all|order_by:"title" %}
+            {% if piece.concertpiece_set.count > 0 %}
+                <tr>
+                    <td>{{ piece.display_title }}</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>
+                        {% for concertPiece in piece.concertpiece_set.all %}
+                            <a href="/concert/{{ concertPiece.concert.pk }}/">{{ concertPiece.concert.season }}</a><br />
+                        {% endfor %}
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+{% endblock %}
+
+{% endif %}

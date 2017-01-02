@@ -1,0 +1,93 @@
+    {% extends "base.html" %}
+{% load markup %}
+{% load concerts_extras %}
+
+{% block tab %}1{% endblock %}
+
+{% if concert %}
+
+{% block title %}Concert on {{ concert.pageTitle }}{% endblock %}
+
+{% block body %}
+    <h2>
+    {{ concert.pageSubtitle|remove_dots_from_ampm }}
+    {% if concert.venue and concert.shouldDisplayVenue %}<br /><a class="pageSubTitle" href="/venue/{{ concert.venue.pk }}">{{ concert.venue.name }}</a>{% endif %}
+    </h2>
+
+    {% if concert.conductor.lastName == "Rostrum" %}
+        <span class="concertPiece">Conducted by members of the public in return for charitable donations</span>
+    {% else %}
+        <span class="concertPiece">Conductor: <a href="/conductor/{{ concert.conductor.pk }}" class="concertPiece">{{ concert.conductor }}</a></span>
+    {% endif %}
+    <br /><br />
+    {% if concert.ticketLink != "" %}
+<a href="{{ concert.ticketLink }}" target="_blank" class="ext"><b>Buy tickets online</b></a><br/><br/>
+    {% endif %}
+
+    {% if concert.content and concert.isSponsoredPlay %}
+        {{ concert.content|markdown }}
+    {% endif %}
+
+    {% for piece in concert.piecesInOrder %}
+        <div class="concertPiece">
+            <a href="/composer/{{ piece.piece.composer.pk }}/" class="composer">{{ piece.piece.composer.conventional_name }}</a>{% if piece.piece.alternativeComposer %},
+                {{ piece.piece.alternativeComposerDesignation }} {{ piece.piece.alternativeComposer.conventional_name }}{% endif %}
+            <br />
+            <span class="piece">{{ piece.piece.title }}{% if piece.comment %} ({{ piece.comment }}){% endif %}</span>
+        {% for soloist in piece.concertpiecesoloist_set.all %}
+            <br /><span class="soloist">{{ soloist.displayRole }}: <a href="/soloist/{{ soloist.soloist.pk }}/">{{ soloist.soloist }}</a></span>
+        {% endfor %}
+        </div>
+    {% endfor %}
+
+    {% if concert.content and not concert.isSponsoredPlay %}
+        {{ concert.content|markdown }}
+    {% endif %}
+
+    {% if soundClips %}
+        <h3>Listen to this concert</h3>
+        {% for soundClip in soundClips %}
+            {{ soundClip|safe }}
+        {% endfor %}
+    {% endif %}
+
+    {% if showIcs or downloads %}
+    <h3>Downloads</h3>
+    {% endif %}
+    {% if showIcs %}
+    <a href="/concert.{{ concert.pk }}{% if member %}.m{% endif %}.ics" class="ics">Concert details as an iCalendar file</a><br />
+    {% if member %}<span class="outlooktip">Note that if you are using Microsoft Outlook you may need to right click to save this file and import it into your
+    calendar using File / Import rather than letting Outlook open it directly.</span><br />{% endif %}
+    {% endif %}
+    {% if downloads %}
+        {% for download in downloads %}
+            <a href="/download{{ download.1 }}" class="{{ download.3 }}">{{ download.0 }}</a><br />
+        {% endfor %}
+    {% endif %}
+
+    {% if member %}
+        <h3>Rehearsal schedule</h3>
+        {% for rehearsal in concert.rehearsal_set.all|order_by:"start" %}
+            {{ rehearsal.start|date:"j F Y, g.ia"|remove_dots_from_ampm }}-{{ rehearsal.end|date:"g.ia"|remove_dots_from_ampm }},
+            {% if rehearsal.venue and not rehearsal.altVenue %}
+                <a href="/venue/{{ rehearsal.venue.pk }}/">{{ rehearsal.venue }}</a>
+            {% endif %}
+            {% if rehearsal.venue and rehearsal.altVenue %}
+                <a href="/venue/{{ rehearsal.venue.pk }}/">{{ rehearsal.venue }}</a> ({{ rehearsal.venueComment }}), <a href="/venue/{{ rehearsal.altVenue.pk }}/">{{ rehearsal.altVenue }}</a> ({{ rehearsal.altVenueComment }})
+            {% endif %}
+            {% if rehearsal.isSectional %}
+                (sectional)
+            {% endif %}
+            <br />
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}
+
+    {% block endscriptlines %}
+    window.setTimeout(function() {
+        $("#amzn_search_textfield").val('{{ concert.searchTerm }}').next().click();
+       }, 1000);
+    {% endblock %}
+
+{% endif %}

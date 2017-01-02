@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load markup %}
+
+{% block tab %}1{% endblock %}
+
+{% block title %}Listen to KSO{% endblock %}
+
+{% block body %}
+    <h2>Listen to KSO</h2>
+
+    {% for soundClip in soundClips %}
+        <h3><a href="/concert/{{ soundClip.concertPiece.concert.pk }}">{{ soundClip.concertPiece.concert.dateAndVenue }}</a></h3>
+        {{ soundClip.soundCloudEmbedCode|safe }}
+    {% endfor %}
+
+{% endblock %}

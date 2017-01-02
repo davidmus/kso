@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load concerts_extras %}
+
+{% block tab %}0{% endblock %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block body %}
+
+    <h2>Coming up</h2>
+
+    <p><a href="/concert">{{ concert.linkText }}</a><br />
+    {{ concert.dateAndTime|date:"l j F Y" }} at {{ concert.dateAndTime|date:"g.ia"|remove_dots_from_ampm }}
+    {% if concert.conductor.lastName != "Keable" and concert.conductor.lastName != "Rostrum" %}
+        <br />With guest conductor <a href="/conductor/{{ concert.conductor.id }}/">{{ concert.conductor.full_name }}</a><br />
+    {% endif %}
+    {% for concertPiece in concert.piecesInOrder %}
+        {% for soloist in concertPiece.soloistsInOrder %}
+            <br /><span class="soloist">{{ soloist.displayRole }}: <a href="/soloist/{{ soloist.soloist.id }}/">{{ soloist.soloist.full_name }}</a></span>
+        {% endfor %}
+    {% endfor %}
+
+    </p>
+
+    {% if secondConcert %}
+    <p><a href="/concert/{{ secondConcert.id }}">{{ secondConcert.linkText }}</a><br />
+    {{ secondConcert.dateAndTime|date:"l j F Y" }} at {{ secondConcert.dateAndTime|date:"g.ia"|remove_dots_from_ampm }}
+    {% if secondConcert.conductor.lastName != "Keable" and secondConcert.conductor.lastName != "Rostrum" %}
+        <br />With guest conductor <a href="/conductor/{{ secondConcert.conductor.id }}/">{{ secondConcert.conductor.full_name }}</a><br />
+    {% endif %}
+    {% for concertPiece in secondConcert.piecesInOrder %}
+        {% for soloist in concertPiece.soloistsInOrder %}
+            <br /><span class="soloist">{{ soloist.displayRole }}: <a href="/soloist/{{ soloist.soloist.id }}/">{{ soloist.soloist.full_name }}</a></span>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+
+    </p>
+
+    <h2>Welcome to KSO</h2>
+
+    {{ content|markdown }}
+
+{% endblock %}

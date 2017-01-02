@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load markup %}
+{% load concerts_extras %}
+
+{% block tab %}{{ page.menuIndex }}{% endblock %}
+
+{% if page %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block activemenu %}$("div.hoverBtn.{{ page.menuKey }}").addClass("selected");{% endblock %}
+
+{% block body %}
+    {% if page.content %}
+        {{ page.content|markdown|obfuscate_mailto }}
+    {% endif %}
+{% endblock %}
+
+{% endif %}

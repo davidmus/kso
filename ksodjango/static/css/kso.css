@@ -1,0 +1,386 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", sans-serif;
+    font-size: 0.8em;
+    line-height: 140%;
+    background: transparent url(../images/bg.jpg) repeat-x;
+}
+
+p, h2, h3 {
+    margin: 1em 0;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 1.25;
+}
+
+h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+th {
+    font-weight: bold;
+}
+
+/* ######### CSS for top level tabs ######### */
+
+.tabsmenuclass{
+height:25px;
+}
+
+.tabsmenuclass ul{
+overflow: hidden;
+width: auto;
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+.tabsmenuclass li{
+float: left;
+}
+
+.tabsmenuclass a,
+.tabsmenuclass a:visited{
+display: block;
+padding: 3px 7px 4px 7px;
+background: #E8E8E8;
+color: black;
+margin-right: 2px;
+text-decoration: none;
+font-weight: bold;
+font-size: 13px;
+}
+
+.tabsmenuclass a:hover,
+.tabsmenuclass a.selected {
+background: #005291;
+padding-bottom: 5px;
+color: white;
+}
+
+/* ######### CSS for sub menu container below ######### */
+
+.tabsmenucontentclass {
+clear: left;
+background: #005291;
+width:962px;
+height: 18px;
+padding: 3px 7px;
+border: 0;
+}
+
+.tabsmenucontentclass a,
+.tabsmenucontentclass a:visited{
+text-decoration: none;
+    color: white;
+    font-size: 12px;
+}
+
+.tabsmenucontentclass a:hover{
+    color: #F6A924;
+}
+
+a.additionalsubmenu{
+    position: relative;
+    top: 0;
+}
+
+.tabsmenucontentclass ul{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+.tabsmenucontentclass li{
+float: left;
+margin-right: 1em;
+    padding-right: 1em;
+    border-right: solid 1px white
+}
+
+
+body.bare {
+    background-image: none;
+    margin: 10px;
+}
+
+html,body {
+    height: 100%;
+}
+
+div#body {
+    min-height: 100%;
+    width: 976px;
+    position: relative;
+    left: 50%;
+    margin-left: -488px;
+    overflow:auto;
+	padding-bottom: 50px;
+    /*border-left: solid 1px black;
+    border-right: solid 1px black;*/
+}
+
+div#logo {
+    height:110px;
+    margin:13px 0 16px 0;
+    background: transparent url(../images/kso275.png) no-repeat;
+}
+
+div#like{
+    position:absolute;
+    top:15px;
+    left:50%;
+    margin-left:38px;
+}
+
+div#like .like{
+padding-bottom:5px;
+}
+
+a.ext{
+    padding-right:20px;
+    background: url(../images/ext.gif) no-repeat center right;
+}
+
+.pics {
+    padding: 0;
+    margin:  0;
+}
+
+.pics img {
+    padding: 0;
+    border:  0;
+    background-color: #fff;
+    width:  976px;
+    height: 120px;
+    top:  0;
+    left: 0
+}
+
+div#amazon{
+    height:600px;
+    width:160px;
+    float:right;
+    margin:10px 0 10px 10px;
+}
+
+div#quotes{
+    width:220px;
+    float:right;
+    margin:10px 0 0 10px;
+}
+
+div#main{
+    width:556px;
+    margin-top: 10px;
+}
+
+div#footer{
+    position: relative;
+	margin-top: -50px;
+	height: 50px;
+	clear:both;
+    background: transparent url(../images/bg2.jpg) repeat-x;
+    font-size:0.85em;
+}
+
+div#footer-content{
+    width: 976px;
+    position: relative;
+    left: 50%;
+    margin-left: -488px;
+    padding-top: 10px;
+}
+
+/*Opera Fix*/
+body:before {
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;
+}
+
+table.month{font-size:11px;margin:3px 6px 3px 6px;}
+table.month th{padding:1px 2px 1px 2px;width:18px;}
+table.month td{text-align:center;}
+table.month td.sun,table.month td.sat{background-color:#e0e0e0;}
+table.year tr{vertical-align:top;}
+table.year th.year{display:none;}
+table.month th{color:#fff;background-color:#808080;}
+
+.calStyle1{background-color:#f0f0f0 !important;}
+.calStyle2{background-color:#c0c0c0 !important;}
+.calStyle3{background-color:#ffa500 !important;}
+.calStyle4{background-color:#e0e000 !important;}
+.calStyle5{background-color:#ff5050 !important;}
+.calStyle6{background-color:#00e030 !important;}
+
+a,a:visited{text-decoration:none;color:#003A6B}
+a:hover{color:#FE8727;}
+table.year a:hover{color:#003A6B;}
+
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	opacity: 0.85;
+    font-size: 0.9em;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+
+p.quote{
+    color:#003A6B;
+    font-size:1.3em;
+    font-style:italic;
+    padding:0;
+    margin:3px 0 0 0;
+}
+
+p.attribution{
+    color:#F6A924;
+    font-size:0.9em;
+    padding:0;
+    margin:1px 0 15px 0;
+    text-align:right;
+}
+
+div.pageImage{
+    float:right;
+    margin: 0 0 10px 15px;
+    text-align: center;
+}
+
+.caption{
+    font-size: 0.85em;
+    font-weight: bolder;
+    margin-top: 6px;
+}
+
+.pageSubTitle{
+    font-size: 0.8em;
+}
+
+p.title{
+    margin-bottom: 15px;
+}
+div.concertPiece{
+    margin-bottom: 8px;
+}
+
+.pdf{background: url(../images/pdf16.gif) no-repeat right center;padding-right:21px;}
+.jpg{background: url(../images/jpg16.gif) no-repeat right center;padding-right:21px;}
+.ics{background: url(../images/ics16.gif) no-repeat right center;padding-right:21px;}
+
+.piece{font-weight:bolder}
+
+table.history td {
+    vertical-align: top;
+    padding-bottom: 10px;
+}
+
+div#banners iframe {
+    margin-bottom: 10px;
+}
+
+input.button {
+    background: #003A6B;
+    color: white;
+}
+
+div.errorlist {
+    color: #a00;
+}
+
+th.concert, th.pieces {
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+th.concert {
+    width: 200px;
+}
+
+.outlooktip {
+    font-size: smaller;
+    color: #444;
+    font-style: italic;
+}
+
+.soloist {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+label {
+    font-size: 0.9em;
+    font-style: italic;
+    display: block;
+}
+
+.dates {
+    font-size: 0.7em;
+    position: relative;
+    top: -1px;
+}
+
+img.programmecover {
+    border: solid 1px #666;
+}
+
+div.programmecover {
+    padding: 0 15px 3px 0;
+}
+
+em {
+    font-style: italic;
+}
+
+strong {
+    font-weight: bold;
+}
+
+#gallery {
+    padding: 30px;
+    background: #e1eef5;
+  }
+  #descriptions {
+    position: relative;
+    height: 50px;
+    background: #EEE;
+    margin-top: 10px;
+    width: 640px;
+    padding: 10px;
+    overflow: hidden;
+  }
+    #descriptions .ad-image-description {
+      position: absolute;
+    }
+      #descriptions .ad-image-description .ad-description-title {
+        display: block;
+      }
+
+.list_section {
+    font-size: 0.95em;
+    line-height: 1.05em;
+}
+.list_player {
+    font-size: 0.85em;
+}
+.list_instrument {
+    font-weight: bold;
+}
+.list_column {
+    vertical-align: top;
+    width: 25%;
+}
+.list_table {
+    width: 100%;
+}

@@ -1,0 +1,91 @@
+<div id="links">
+    <div class="linkHead">Quick links</div>
+    <div class="linkItem"><b><a href="/signup/">Join our mailing list</a></b></div>
+    <div class="linkItem"><a href="http://www.amazon.co.uk/exec/obidos/redirect-home?tag=kensingtonsym-21&site=amazon">Support KSO at Amazon</a></div>
+    <div class="linkItem"><a href="/boxoffice/">Buy tickets</a></div>
+    <div class="linkItem"><a href="http://www.sjss.org.uk/">St. John's, Smith Square</a></div>
+    <div class="linkItem"><a href="http://www.cadoganhall.com/">Cadogan Hall</a></div>
+    <div class="linkItem"><a href="http://www.classicalsource.com/db_control/db_search.php?search=Kensington+Symphony+Orchestra&Submit=Search">classicalsource.com</a></div>
+    <div class="linkItem"><a class="email" onclick="var symbol=String.fromCharCode(0x40);this.href=&apos;mai&apos;+&apos;lto:&apos;+&apos;web.master&apos;+symbol+&apos;kso.org.uk&apos;;" href="#">Email webmaster</a></div>
+    <div class="linkItem"><a href="/archive/">Concert archive</a></div>
+    {% if member %}
+        <div class="linkItem"><a href="..">Leave members' area</a></div>
+    {% else %}
+        <div class="linkItem"><a href="m/">Enter members' area</a></div>
+    {% endif %}
+    <div id="publicationsAndAnniversaries">
+        <div class="linkHead subsequent">RECORDINGS &amp; BOOKS</div>
+        <div style="height:50px;width:160px;overflow:hidden;">
+            <table cellpadding="0" cellspacing="0" style="position: absolute; width: 168px; height: 50px; display: none; " id="pub0">
+                <tr style="height:50px;">
+                    <td style="width:43px;">
+                        <div style="height:38px;width:38px;text-align:center;position:relative;to:1px">
+                            <a class="amazon" title="Click to buy from Amazon" href="http://www.amazon.co.uk/Stravinsky-Ballets-Igor/dp/B000001GYI%3FSubscriptionId%3D0GDP87NEB5AB0HT19302%26tag%3Dkensingtonsym-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000001GYI"><img id="ctl00_publications_ctl01_i_i" title="CD: Stravinsky - Ballets" src="./KSO    Concert on 12 Mar 2011_files/41RG9WD871L._SL75_.jpg" alt="?" style="height:38px;width:38px;border-width:0px;" /></a>
+                        </div>
+                    </td>
+                    <td style="width:125px;vertical-align:middle;" class="amazonLink">
+                        <a class="amazon" title="Click to buy from Amazon" href="http://www.amazon.co.uk/Stravinsky-Ballets-Igor/dp/B000001GYI%3FSubscriptionId%3D0GDP87NEB5AB0HT19302%26tag%3Dkensingtonsym-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB000001GYI">CD: Stravinsky - Ballets</a>
+                    </td>
+                </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" style="position: absolute; width: 168px; height: 50px; display: table; " id="pub1">
+                <tr style="height:50px;">
+                    <td style="width:43px;">
+                        <div style="height:38px;width:38px;text-align:center;position:relative;to:1px">
+                            <a class="amazon" title="Click to buy from Amazon" href="http://www.amazon.co.uk/Vaughan-Williams-London-Philharmonic-Orchestra/dp/B00006J3LP%3FSubscriptionId%3D0GDP87NEB5AB0HT19302%26tag%3Dkensingtonsym-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00006J3LP"><img title="CD: Vaughan Williams - Complete Symphonies" src="./KSO    Concert on 12 Mar 2011_files/41MDJET9RXL._SL75_.jpg" alt="?" style="height:38px;width:38px;border-width:0px;" /></a>
+                        </div>
+                    </td>
+                    <td style="width:125px;vertical-align:middle;" class="amazonLink">
+                        <a class="amazon" title="Click to buy from Amazon" href="http://www.amazon.co.uk/Vaughan-Williams-London-Philharmonic-Orchestra/dp/B00006J3LP%3FSubscriptionId%3D0GDP87NEB5AB0HT19302%26tag%3Dkensingtonsym-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB00006J3LP">CD: Vaughan Williams - Complete Symphonies</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="linkHead subsequent">ANNIVERSARIES</div>
+        <div style="height:50px;width:160px;overflow:hidden;">
+            <table cellpadding="0" cellspacing="0" style="position: absolute; width: 168px; height: 50px; display: none; " id="ann0">
+                <tr style="height:50px">
+                    <td style="width:168px;vertical-align:top">
+                        <span class="linkItem">Herrmann was born 100 years ago this year</span>
+                    </td>
+                </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" style="position: absolute; width: 168px; height: 50px; display: none; " id="ann1">
+                <tr style="height:50px">
+                    <td style="width:168px;vertical-align:top">
+                        <span class="linkItem">Hovhaness was born 100 years ago this year</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+<script type="text/javascript">//<![CDATA[
+var annIndex=-1,annCount=0,annNewIndex=0,annScale=0;
+$(function(){
+    while($("#ann"+(++annCount)).length!=0)
+        $("#ann"+annCount).hide();
+    if(annCount!=0) {
+        $("#ann0").show();
+        if(annCount!=1)
+            annQueue();
+    }
+});
+function annChange(){
+    annNewIndex=(annIndex+1)%annCount;
+    $("#ann"+annIndex).fadeOut(750,function(){
+        $(this).hide();
+    });
+    $("#ann"+annNewIndex).fadeIn(750);
+    annIndex=annNewIndex;annQueue();
+}
+function annQueue(){window.setTimeout('annChange()',5000);}//]]>
+</script>
+    </div>
+{% if next_concert %}
+    <div id="nextConcert">
+        <div id="nextConcertInner">
+            <div class="linkHead subsequent">NEXT CONCERT</div>
+            <div class="linkItem"><a href="/concert/">{{ next_concert.linkText }}</a></div>
+        </div>
+    </div>
+{% endif %}
+</div>

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block tab %}1{% endblock %}
+
+{% block title %}{{ season }}{% endblock %}
+
+{% block body %}
+
+    <h2>{{ season }}</h2>
+
+    {% for concert in season.concertsInOrder %}
+        <h3><a href="/concert/{{ concert.pk }}">{{ concert.dateAndVenue }}</a></h3>
+        {% if concert.conductor.lastName != "Keable" and concert.conductor.lastName != "Rostrum" %}
+            With guest conductor <a href="/conductor/{{ concert.conductor.id }}/">{{ concert.conductor.full_name }}</a><br />
+        {% endif %}
+        {% for piece in concert.piecesInOrder %}
+            <a href="/composer/{{ piece.piece.composer.pk }}/">{{ piece.piece.composer.conventional_name }}</a>{% if piece.piece.alternativeComposer %},
+                {{ piece.piece.alternativeComposerDesignation }} {{ piece.piece.alternativeComposer.conventional_name }}{% endif %}: <span class="piece">{{ piece.piece.display_title }}</span>{% if piece.comment %} ({{ piece.comment }}){% endif %}<br />
+            {% for soloist in piece.soloistsInOrder %}
+                <span class="soloist">{{ soloist.displayRole }}: <a href="/soloist/{{ soloist.soloist.id }}/">{{ soloist.soloist.full_name }}</a></span><br />
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+
+    <h3>Downloads</h3>
+    <a href="/season.{{ season.pk }}.ics" class="ics">Download season as an iCalendar file</a><br />
+    <span class="outlooktip">Note that if you are using Microsoft Outlook you may need to right click to save this file and import it into your
+    calendar using File / Import rather than letting Outlook open it directly.</span><br />
+
+{% endblock %}

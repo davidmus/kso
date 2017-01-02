@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.ad-gallery.css">
+<script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery.ad-gallery.min.js"></script>
+
+{% endblock %}
+
+{% block tab %}0{% endblock %}
+
+{% block script %}
+$(function() {
+    {% for photo in photos %}
+    $('img.image{{ forloop.counter0 }}').data('ad-title', '{{ photo.caption }}');
+    $('img.image{{ forloop.counter0 }}').data('ad-desc', '{{ photo.credit }}');
+    {% endfor %}
+    var galleries = $('.ad-gallery').adGallery({
+      loader_image: '{{ STATIC_URL }}css/loader.gif'
+    });
+});
+{% endblock %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block body %}
+
+    <h2>Photo Gallery</h2>
+
+<div id="gallery" class="ad-gallery">
+      <div class="ad-image-wrapper">
+      </div>
+      <div class="ad-controls">
+      </div>
+      <div class="ad-nav">
+        <div class="ad-thumbs">
+          <ul class="ad-thumb-list">
+              {% for photo in photos %}
+              <li>
+                <a href="{{ MEDIA_URL }}{{ photo.fileName }}">
+                  <img src="{{ MEDIA_URL }}{{ photo.thumbnailName }}" class="image{{ forloop.counter0 }}">
+                </a>
+              </li>
+              {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block quotes %}{% endblock %}
